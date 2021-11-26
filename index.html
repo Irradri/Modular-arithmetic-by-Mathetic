@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modular Arithmetic | Mathetic</title>
+    <link rel="shortcut icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Pi-symbol.svg/1058px-Pi-symbol.svg.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<style>
+		::selection{
+            background-color: #00ff0088;
+            color: #000;
+        }
+        body{
+            background-image: url('https://blog.1a23.com/wp-content/uploads/sites/2/2020/02/Desktop.png');
+            background-color: #0008;
+            background-blend-mode: darken;
+            background-size: cover;
+            background-position: center center;
+            min-height: 100%;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-size: larger;
+        }
+        .bordu{
+            border-width: 0 0 1px 0;
+            border-style: dashed;
+            border-color:  #f00;
+            padding: 10px 0 10px 0;
+        }
+        .problem{
+            background-color: #fffa;
+            color: #000;
+            border-radius: 20px;
+            margin: 10px;
+        }
+        .que{
+            border-width: 0 0 1px 0;
+            border-style: dashed;
+            border-color: #000;
+            min-height: 60px;
+            padding: 20px;
+        }
+        .ans{
+            min-height: 60px;
+            padding: 20px;
+        }
+	</style>
+</head>
+<body class="text-light">
+    <div class="container-fluid text-center bordu" style="margin-bottom: 200px;padding-bottom: 20px;border-width: 0 0 1px 0;border-style: dashed;border-color:  #fff;">
+        <img src="https://irradri.github.io/Mathetic/Drawing.svg" width="75%"><br>
+        <h1 class="display-3">The Perfect Workspace For a Maths Lover!</h1><br>
+        and for a hater too!
+    </div>
+    <div class="w-75 mx-auto">
+        <div class="row pb-3 bordu">
+            <div class="col-sm-8">
+                <h1 class="display-2 mb-4">Modular Arithmetic</h1>
+                <p>Modular arithmetic is a system of arithmetic for integers, which considers the remainder. The modern approach to modular arithmetic was developed by Carl Friedrich Gauss in his book Disquisitiones Arithmeticae, published in 1801.
+                It leads to solutions to some mathematical problems in real life and generally appears in fields like cryptography, computer science, and computer algebra. For Instance:</p>
+                <p>What is the remainder when 7<sup>2015</sup> is divided by 25?</p>
+                <p>What is the remainder when the sum of the digits of the sum of the digits of the sum of the digits of 77777<sup>777</sup> is divided by 9?</p>
+                <p>Find the last three digits of 9 × 99 × 999 ×...×999999999[9 occuring 9 times]. </p>
+                <p>It might take some time to realize that if you go ahead and try to compute these, its a nightmare.....even for a calculator!</p>
+            </div>
+            <div class="col-sm-4">
+                <div class="card text-dark">
+                    <img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Carl_Friedrich_Gauss.jpg/373px-Carl_Friedrich_Gauss.jpg" alt="">
+                    <div class="card-body">
+                        <h4 class="card-title">Johann Carl Friedrich Gauss</h4>
+                        <p class="card-text">(one of the most awesome mathematicians)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bordu">
+            <h1 class="display-4 mb-4">Some fancy notation</h1>
+            <p>First things first, Modular arithmetic is a game of integers. You can't involve fractions or irrationals or complex numbers here.</p>
+            <p>A number <strong><i>x</i> mod <i>N</i></strong> is the equivalent of asking for the <strong>remainder of <i>x</i> when divided by <i>N</i>.</strong><br> For example, when we divide 23 by 7, we get remainder 2. So <strong>23 mod 7 = 2</strong><br>Similiarly, we can show that 54 mod 8 = 6, 45 mod 5 = 0 and so on...</p>
+            <p>Another way of saying it is that if x = Nq+r [N is divisor, q is quotient and r is remainder] then x mod N = r.</p>
+            <p>If integers a and b have the same remainder upon division by N, we say that <strong>a ≡ b (mod N)</strong>.</p>
+            <p>Or Simply, <strong>a ≡ b (mod N)</strong> means the same as <strong>a mod N = b mod N</strong></p>
+            <p>(notice that it's ≡ not = | ≡ means 'congruent' like = means 'equals')</p>
+            <p>So, 52 ≡ 24 (mod 7) , 36 ≡ 10(mod 13) and so on...</p>
+            <p>Another way of defining this is that if <strong>a ≡ b (mod N)</strong> then <strong>(a - b) is an integer multiple of N.</strong> How? if a mod N = b mod N, then a = Np + r and b = Nq + r,<br> so (a - b) = N(p - q) = integer multiple of N.</p>
+            <p>In the above examples, 52 - 24 = 28 = 7 × 4 and 36 - 10 = 26 = 13 × 2. Cool!</p>
+        </div>
+        <div class="bordu">
+            <h1 class="display-4 mb-4">Properties of addition</h1>
+            <ol type="I">
+                <li><strong>a mod N + b mod N ≡ a + b (mod N)</strong>.<br>a = Np + r<sub>1</sub> and b = Nq + r<sub>2</sub>. So a + b = N(p + q) + r<sub>1</sub> + r<sub>2</sub>. So a + b ≡ r<sub>1</sub> + r<sub>2</sub> ≡ a mod N + b mod N(mod N)<br>
+                <li><strong>If a ≡ b(mod N), then a + k ≡ b + k(mod N) for any integer k.</strong><br>If a ≡ b(mod N), then (a - b) divides N. Now, (a - b) = ((a + k) - (b + k)). So, (a + k) - (b + k) divides N => a + k ≡ b + k (mod N)</li>
+                <li><strong>If a ≡ b(mod N) and c ≡ d(mod N), then a + c ≡ b + d(mod N).</strong><br>a ≡ b(mod N) and c ≡ d(mod N) => (a - b) and (c - d) divides N => (a - b) + (c - d) divides N => (a + c) - (b + d) divides N => a + c ≡ b + d(mod N)</li>
+                <li><strong>If a ≡ b(mod N), a ≡ b + kN(mod N) for any integer k</strong><br>a ≡ b(mod N) and 0 ≡ kN(mod N) => a + 0 ≡ b + kN(mod N) => a ≡ b + kN(mod N)</li>
+            </ol>
+            <h2>Examples:</h2>
+            <div class="problem">
+                <div class="que">Q: Find the remainder of 313 + 841 when divided by 24.</div>
+                <div class="ans">
+                    <p><b>Solution 1:</b>(313 + 841) ≡ 1154 ≡ 2(mod 24)</p>
+                    <p><b>Solution 2:</b>313 ≡ 1 and 841 ≡ 1 (mod 24) <br>&therefore; 313 + 841 ≡ 1 + 1 ≡ 2(mod 24)</p>
+                    <p>&therefore; (313 + 841)mod 24 = 2 mod 24 = 2</p>
+                </div>
+            </div>
+            <div class="problem">
+                <div class="que">Q: Find the remainder when 123 + 234 + 32 + 56 + 22 + 12 + 78 is divided by 3</div>
+                <div class="ans">
+                    <p>We know that 123 ≡ 0(mod 3), 234 ≡ 0(mod 3), 32 ≡ 2(mod 3), 56 ≡ 2(mod 3), 22 ≡ 1(mod 3), 12 ≡ 0(mod 3), and 78 ≡ 0(mod 3).</p>
+                    <p>This implies that: 123 + 234 + 32 + 56 + 22 + 12 + 78 ≡ 0 + 0 + 2 + 2 + 1 + 0 + 0 ≡ 5 ≡ 2(mod 3)</p>
+                    <p>and thus the answer is 2 mod 3 = 2</p>
+                </div>
+            </div>
+            Note: if <strong>0 ≤ b < N</strong> then <strong>b mod N = b</strong> [think about it if you don't get why]
+        </div>
+        <div class="bordu">
+            <h1 class="display-4 mb-4">Properties of multiplication</h1>
+            <ol type="I">
+                <li><strong>a mod N × b mod N ≡ ab (mod N)</strong>.<br>a = Np + r<sub>1</sub> and b = Nq + r<sub>2</sub>. So ab = N<sup>2</sup>pq + Nqr<sub>1</sub> + Npr<sub>2</sub> + r<sub>1</sub>r<sub>2</sub> = N(Npq + qr<sub>1</sub> + pr<sub>2</sub>) + r<sub>1</sub>r<sub>2</sub> => ab ≡ r<sub>1</sub>r<sub>2</sub> ≡ a mod N × b mod N(mod N)<br>
+                <li><strong>If a ≡ b(mod N), then ak ≡ bk(mod N) for any integer k.</strong><br>a ≡ b(mod N) => (a - b) divides N => k(a - b) divides N => (ak - bk) divides N => ak ≡ bk (mod N)</li>
+                <li><strong>If a ≡ b(mod N) and c ≡ d(mod N), then ac ≡ bd(mod N).</strong><br>a ≡ b(mod N) and c ≡ d(mod N) => a mod N = b mod N and c mod N = d mod N => a mod N × c mod N = b mod N × d mod N <br>Now a mod N × c mod N ≡ ac and b mod N × d mod N ≡ bd(mod N) <br>&there4; ac ≡ bd(mod N)</li>
+            </ol>
+            <h2>Examples:</h2>
+            <div class="problem">
+                <div class="que">Q: (8 × 16) mod 7 ?</div>
+                <div class="ans">
+                    <p><b>Solution 1:</b> (8 × 16) ≡ 128 ≡ 2 (mod 7)</p>
+                    <p><b>Solution 2:</b> 8 ≡ 1 and 16 ≡ 2 (mod 7) => 8 × 16 ≡ 1 × 2 ≡ 2 (mod 7) = 2</p>
+                </div>
+            </div>
+            <div class="problem">
+                <div class="que">Q: Find the remainder when 124 × 134 × 23 × 49 × 235 × 13 is divided by 3</div>
+                <div class="ans">
+                    <p>In this example, multiplying the numbers would be very tedious. Instead, we use property 3 repeatedly. We know that 124 ≡ 1(mod 3), 134 ≡ 2(mod 3),<br> 23 ≡ 2(mod 3), 149 ≡ 1(mod 3), 235 ≡ 1(mod 3) and 13 ≡ 1(mod 3). Therefore, </p>
+                    <p>124 × 134 × 23 × 49 × 235 × 13 ≡ 1 × 2 × 2 × 1 × 1 × 1 ≡ 4 ≡ 1(mod 3) = 1</p>
+                </div>
+            </div>
+            <div class="problem">
+                <div class="que">Q: What is the last digit when 1234 × 5678 is multiplied?</div>
+                <div class="ans">
+                    <label for="prob1">Your Answer:</label>
+                    <input type="number" name="prob1" class="form-control" id="prob1" placeholder="type here"><br>
+                    <button class="btn btn-warning check1">Check</button>
+                    <a class="btn btn-secondary" data-toggle="collapse" href="#contentId1" aria-expanded="false" aria-controls="contentId1">
+                        Get A Hint
+                    </a>
+                    <a class="btn btn-danger" href="sol1.jpg">View Solution</a>
+                    
+                    <div class="message1"></div>
+                    <div class="collapse" id="contentId1">
+                        Any Number N mod 10 = last digit of N <br>
+                        eg: 451 mod 10 = 1 , 254 mod 10 = 4
+                    </div>
+                </div>
+            </div>
+            <p>Note:<br> N mod <strong>10</strong> = <strong>Last digit</strong> of N <br>N mod <strong>100</strong> = <strong>Last 2 digits</strong> of N <br>N mod <strong>1000</strong> = <strong>Last 3 digits</strong> of N and so on....</p>
+        </div>
+        <div class="bordu">
+            <h1 class="display-4 mb-4">Exponential Property</h1>
+            <p>
+                <strong>If a ≡ b(mod N) then a<sup>k</sup> ≡ b<sup>k</sup>(mod N) for any non-negative integer k</strong><br>
+                a ≡ b(mod N) which implies <br>a ≡ b(mod N) which again implies <br>a ≡ b(mod N) [bruh]<br>.<br>.&ThickSpace;&ThickSpace;&ThickSpace;&ThickSpace;[writing k times]<br>.<br>a ≡ b(mod N)<br>&therefore; by multiplying all these using multiplication property III, we get a<sup>k</sup> ≡ b<sup>k</sup>(mod N)
+            </p>
+            Note: k is <strong>non-negative</strong> as it doesn't make sense to write an equation negative number of times
+            <div class="problem">
+                <div class="que">Q: What is 4<sup>16</sup> mod 5?</div>
+                <div class="ans">
+                    <p>
+                        <b>Strategy:</b>Find n such that 4<sup>n</sup> ≡ 1 or -1 (mod 5) <br>
+                        We can directly see that 4 ≡ -1 (mod 5) <br>
+                        So 4<sup>16</sup> ≡ (-1)<sup>16</sup> ≡ 1 (mod 5) <br>
+                        ∴ 4<sup>16</sup> mod 5 = 1
+                    </p>
+                </div>
+            </div>
+            <p>Amazing, right? We <strong>didn't</strong> have to compute 4<sup>16</sup>, which is really large</p>
+            <div class="problem">
+                <div class="que">Q: What is the last digit of 17<sup>17</sup> ?</div>
+                <div class="ans">
+                    <p>
+                        Finding the last digit means the same as applying mod 10. <br>
+                        If we try applying the strategy above, finding n is very difficult through trial and error.<br>
+                        Instead, we use this clever trick: <br>
+                        17 ≡ -3(mod 10) => 17<sup>17</sup> ≡ (-3)<sup>17</sup>(mod 10) <br>
+                        Now, (-3)<sup>2</sup> ≡ 9 ≡ -1(mod 10) => (-3)<sup>16</sup> ≡ (-1)<sup>8</sup> ≡ 1(mod 10) => (-3)<sup>17</sup> ≡ -3 ≡ 7(mod 10) <br>
+                        ∴ 17<sup>17</sup> ≡ (-3)<sup>17</sup> ≡ 7(mod 10) <br>
+                        ∴ Last Digit = 7
+                    </p>
+                </div>
+            </div>
+            <div class="problem">
+                <div class="que">Q: Find the last three digits of 2<sup>40</sup>.</div>
+                <div class="ans">
+                    <p>
+                        2<sup>40</sup> = (2<sup>10</sup>)<sup>4</sup> = (1024)<sup>4</sup><br>
+                        (1024)<sup>4</sup> ≡ (24)<sup>4</sup> ≡ (576)<sup>2</sup> ≡ 331776 ≡ 776 (mod 1000) <br>
+                        ∴ 2<sup>40</sup> mod 1000 = 776
+                    </p>
+                </div>
+            </div>
+            <div class="problem">
+                <div class="que">Q: What is the remainder when 2<sup>123456789</sup> is divided by 7?.</div>
+                <div class="ans">
+                    <label for="prob2">Your Answer:</label>
+                    <input type="number" name="prob2" class="form-control" id="prob2" placeholder="type here"><br>
+                    <button class="btn btn-warning check2">Check</button>
+                    <a class="btn btn-secondary" data-toggle="collapse" href="#contentId2" aria-expanded="false" aria-controls="contentId2">
+                        Get A Hint
+                    </a>
+                    <a class="btn btn-danger" href="sol2.jpg">View Solution</a>
+                    <div class="message2"></div>
+                    <div class="collapse" id="contentId2">
+                        <p>Try checking values like 2<sup>1</sup>, 2<sup>2</sup>, 2<sup>3</sup> ... <br>It will work...I promise!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bordu">
+            <h1 class="display-4 mb-4">Problem solving</h1>
+            <div class="problem">
+                <div class="que">Q: What is the remainder when 6^6^6^6^6^6^6 (7 times) is divided by 7?</div>
+                <div class="ans">
+                    <label for="prob3">Your Answer:</label>
+                    <input type="number" name="prob3" class="form-control" id="prob3" placeholder="type here"><br>
+                    <button class="btn btn-warning check3">Check</button>
+                    <a class="btn btn-secondary" data-toggle="collapse" href="#contentId3" aria-expanded="false" aria-controls="contentId3">
+                        Get A Hint
+                    </a>
+                    <a class="btn btn-danger" href="sol3.jpg">View Solution</a>
+                    <div class="message3"></div>
+                    <div class="collapse" id="contentId3">
+                        <p>6 ≡ [What do you think?] (mod 7)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="problem">
+                <div class="que">Q: What is the remainder when 1! + 2! + 3! + ⋯ + 50! is divided by 5!  ? <br>Note: n! = 1 × 2 × 3 × ... × n</div>
+                <div class="ans">
+                    <label for="prob4">Your Answer:</label>
+                    <input type="number" name="prob4" class="form-control" id="prob4" placeholder="type here"><br>
+                    <button class="btn btn-warning check4">Check</button>
+                    <a class="btn btn-secondary" data-toggle="collapse" href="#contentId4" aria-expanded="false" aria-controls="contentId4">
+                        Get A Hint
+                    </a>
+                    <a class="btn btn-danger" href="sol4.jpg">View Solution</a>
+                    <div class="message4"></div>
+                    <div class="collapse" id="contentId4">
+                        <p>5!, 6!, 7!, ... 50! are all multiples of 5! so the question already simplifies a lot</p>
+                    </div>
+                </div>
+            </div>
+            <div class="problem">
+                <div class="que">Q: 1×10<sup>1</sup> + 2×10<sup>2</sup> + 3×10<sup>3</sup> + ... + 2015×10<sup>2015</sup><br>What is the remainder when this number is divided by 11?</div>
+                <div class="ans">
+                    <label for="prob5">Your Answer:</label>
+                    <input type="number" name="prob5" class="form-control" id="prob5" placeholder="type here"><br>
+                    <button class="btn btn-warning check5">Check</button>
+                    <a class="btn btn-secondary" data-toggle="collapse" href="#contentId5" aria-expanded="false" aria-controls="contentId5">
+                        Get A Hint
+                    </a>
+                    <a class="btn btn-danger" href="sol5.jpg">View Solution</a>
+                    <div class="message5"></div>
+                    <div class="collapse" id="contentId5">
+                        <p>10 ≡ -1 (Mod 11)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <h1 class="display-4 mb-4">Conclusion</h1>
+            <p>Now that you know a bit about modular arithmetic, try solving the problems in the beginning of this article. <br>Honestly, this is just <strong>the tip of the iceberg</strong> of what stuff modular arithmetic actually has. Many theorems are there leading to wonderful results, like Fertmat's Little Theorem, Chinese Remainder Theorem etc. With That, I will call it an end to this article and would like to thank you for watching.</p>
+    </div>
+    <footer class="bg-secondary text-light p-3 text-center" id="office">
+        <div style="opacity: 0;" id="boss">
+            ---made by Irradri Basu Khaund---
+        </div>
+    </footer>
+    <script>
+        $(function(){
+            $("strong").addClass("text-info");
+            $(".display-4").addClass("text-warning");
+            $("li").addClass("my-3");
+            //eat and repeat ⌭
+            $('.check1').prop("disabled",true);
+            $('#prob1').keyup(function(){
+                if($('#prob1').val()==''){
+                    $('.check1').prop("disabled",true);
+                }
+                else{
+                    $('.check1').prop("disabled",false);
+                }
+            });
+            $('.check1').click(function(){
+                var ans=$('#prob1').val();
+                if(ans == 2){
+                    $(".message1").html('<div class="alert alert-success alert-dismissible fade show m-2" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>Right Answer!</div>');
+                }
+                else{
+                    $(".message1").html('<div class="alert alert-danger alert-dismissible fade show m-2" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>Wrong Answer!</div>');
+                };
+            });
+            $('.check2').prop("disabled",true);
+            $('#prob2').keyup(function(){
+                if($('#prob2').val()==''){
+                    $('.check2').prop("disabled",true);
+                }
+                else{
+                    $('.check2').prop("disabled",false);
+                }
+            });
+            $('.check2').click(function(){
+                var ans=$('#prob2').val();
+                if(ans == 1){
+                    $(".message2").html('<div class="alert alert-success alert-dismissible fade show m-2" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>Right Answer!</div>');
+                }
+                else{
+                    $(".message2").html('<div class="alert alert-danger alert-dismissible fade show m-2" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>Wrong Answer!</div>');
+                };
+            });
+            $('.check3').prop("disabled",true);
+            $('#prob3').keyup(function(){
+                if($('#prob3').val()==''){
+                    $('.check3').prop("disabled",true);
+                }
+                else{
+                    $('.check3').prop("disabled",false);
+                }
+            });
+            $('.check3').click(function(){
+                var ans=$('#prob3').val();
+                if(ans == 1){
+                    $(".message3").html('<div class="alert alert-success alert-dismissible fade show m-2" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>Right Answer!</div>');
+                }
+                else{
+                    $(".message3").html('<div class="alert alert-danger alert-dismissible fade show m-2" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>Wrong Answer!</div>');
+                };
+            });
+            $('.check4').prop("disabled",true);
+            $('#prob4').keyup(function(){
+                if($('#prob4').val()==''){
+                    $('.check4').prop("disabled",true);
+                }
+                else{
+                    $('.check4').prop("disabled",false);
+                }
+            });
+            $('.check4').click(function(){
+                var ans=$('#prob4').val();
+                if(ans == 33){
+                    $(".message4").html('<div class="alert alert-success alert-dismissible fade show m-2" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>Right Answer!</div>');
+                }
+                else{
+                    $(".message4").html('<div class="alert alert-danger alert-dismissible fade show m-2" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>Wrong Answer!</div>');
+                };
+            });
+            $('.check5').prop("disabled",true);
+            $('#prob5').keyup(function(){
+                if($('#prob5').val()==''){
+                    $('.check5').prop("disabled",true);
+                }
+                else{
+                    $('.check5').prop("disabled",false);
+                }
+            });
+            $('.check5').click(function(){
+                var ans=$('#prob5').val();
+                if(ans == 4){
+                    $(".message5").html('<div class="alert alert-success alert-dismissible fade show m-2" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>Right Answer!</div>');
+                }
+                else{
+                    $(".message5").html('<div class="alert alert-danger alert-dismissible fade show m-2" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>Wrong Answer!</div>');
+                };
+            });
+            $('#office').hover(function(){
+                $("#boss").animate({opacity:"1"},1000);
+            });
+        });
+    </script>
+</body>
+</html>
